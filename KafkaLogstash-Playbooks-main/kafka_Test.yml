@@ -1,0 +1,14 @@
+---
+- hosts: all
+  roles:
+    - role: ttt.java
+    - role: ttt.kafka
+  tasks:
+    - service:
+        name: zookeeper
+        state: started
+        enabled: yes
+    - service:
+        name: kafka
+        state: started
+        enabled: yes
