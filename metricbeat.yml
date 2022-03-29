@@ -189,5 +189,5 @@ processors:
 
 
 output.kafka:
-  hosts: ["54.174.205.91:9092"]
+  hosts: ["18.204.196.16:9092"]
   topic: 'RAHULMBTOPIC'
