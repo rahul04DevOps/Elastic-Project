@@ -1,0 +1,22 @@
+pipeline {
+    agent { label 'jenkins-ssh-slave-2' }
+    
+    stages {
+        stage('Hello') {
+            steps {
+                sh 'kubectl create -f https://download.elastic.co/downloads/eck/2.1.0/crds.yaml'
+                sh 'kubectl apply -f https://download.elastic.co/downloads/eck/2.1.0/operator.yaml'
+                
+            }
+        }
+        stage('install elasticsearch')
+        {
+            steps {
+            checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'GithHubCredintials', url: 'https://github.com/rahul04DevOps/Elastic-Project.git']]])
+            sh 'kubectl apply -f elasticsearch-install.yaml'
+            sh 'kubectl apply -f kibana-install.yaml'
+            }
+          }
+       }
+    }
+
